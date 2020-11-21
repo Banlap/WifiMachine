@@ -1,0 +1,41 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileOptions.encoding = "GBK"
+    compileSdkVersion 27
+    buildToolsVersion "30.0.2"
+
+    defaultConfig {
+        applicationId "com.bigun.wifioscilloscope"
+        minSdkVersion 23
+        targetSdkVersion 27
+        //versionName "1.1.1"
+        versionName "1.1.2" //修复 电平、y1轴 y2轴灵敏度
+    }
+
+    //打包名称
+    applicationVariants.all { variant ->
+        variant.outputs.all {
+            outputFileName = "WifiMachine"+ "_" + defaultConfig.versionName + ".apk"
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            debuggable true
+            jniDebuggable true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
+        }
+        debug {
+            minifyEnabled false
+            debuggable true
+            jniDebuggable true
+        }
+    }
+}
+
+dependencies {
+    //compile 'com.android.support:support-v4:19.1.0'
+    compile files('libs/xUtils-2-5.0.jar')
+}
